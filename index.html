@@ -1,2 +1,41 @@
-<h1>hello<h1>
-<button type=button>Click me<\button>
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Grade Convert</h2>
+
+<input id="text1" placeholder="grade out of 100" onkeypress="return isNumberKey(event)">
+<button type="button" id="btn1" onclick="GradeConvert()">Convert</button>
+<script type="text/javascript">
+	function GradeConvert()
+    {
+    	var old_grade = document.getElementById("text1").value;
+        var grade = 0;
+        
+        if (old_grade <= 65 && old_grade >= 0) {grade = old_grade * 70/65;}
+        else if (old_grade <= 70) {grade = old_grade * 2.25 - 76.25;}
+        else if (old_grade <= 100) {grade = old_grade * 2/3 + 100/3;}
+		else {grade = -1;}
+            
+        if (grade == -1){
+        	alert("grade out of range");
+        } else {
+        	document.getElementById("text2").value = grade.toFixed(2);
+    	}
+    }
+    
+      function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46)
+            return false;
+
+         return true;
+      }
+</script>
+<input id="text2" placeholder="new grade" >
+
+<p id="demo"></p>
+
+</body>
+</html> 
