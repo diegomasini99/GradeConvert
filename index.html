@@ -1,41 +1,101 @@
 <!DOCTYPE html>
 <html>
 <body>
+<style>
+    h3{ text-align: center;}
+    h2{ text-align: center;}
 
-<h2>Grade Convert</h2>
+</style>
 
-<input id="text1" placeholder="grade out of 100" onkeypress="return isNumberKey(event)">
-<button type="button" id="btn1" onclick="GradeConvert()">Convert</button>
-<script type="text/javascript">
-	function GradeConvert()
-    {
-    	var old_grade = document.getElementById("text1").value;
-        var grade = 0;
-        
-        if (old_grade <= 65 && old_grade >= 0) {grade = old_grade * 70/65;}
-        else if (old_grade <= 70) {grade = old_grade * 2 - 60;}
-        else if (old_grade <= 100) {grade = old_grade * 2/3 + 100/3;}
-		else {grade = -1;}
-            
-        if (grade == -1){
-        	alert("grade out of range");
-        } else {
-        	document.getElementById("text2").value = grade.toFixed(0);
-    	}
-    }
-    
-      function isNumberKey(evt)
-      {
-         var charCode = (evt.which) ? evt.which : event.keyCode
-         if (charCode > 31 && (charCode < 48 || charCode > 57))
-            return false;
 
-         return true;
-      }
-</script>
-<input id="text2" placeholder="new grade" >
+<table>
+	<tr>
+    	<td>
+        	<h3>Old Grade</h3>
+
+		</td>
+		<td>
+        	<h3>Grade Converter</h3>
+		</td>
+    	<td>
+        	<h3>New Grade</h3>
+
+		</td>
+    </tr>
+    <tr>
+		<td>
+            <input id="text1" placeholder="grade out of 100" onkeypress="return isNumberKey(event)">
+		</td>
+		<td>
+            <button type="button" id="btn1" onclick="GradeConvert()">Convert</button>
+		</td>
+		<td>
+            <input id="text2" placeholder="new grade" >
+		</td>
+
+    </tr>
+	<tr>
+    	<td>
+        	<h3 id="proftag1"></h3>
+		</td>
+		<td>
+		</td>
+		<td>
+        	<h3 id="proftag2"></h3>
+		</td>
+
+    </tr>
+
+</table>
+
 
 <p id="demo"></p>
+ <script type="text/javascript">
+          function GradeConvert()
+          {
+                var old_grade = document.getElementById("text1").value;
+                var grade = 0;
+				var proficency = "Proficient";
+                
+                if (old_grade < 65 && old_grade >= 0) {
+                    grade = old_grade * 70/65;
+                    proficiency = "Unsatisfactory";
+                    }
+                else if (old_grade < 70) {
+                    grade = old_grade * 2 - 60;
+                    proficiency = "Satisfactory";
+                    }
+                else if (old_grade < 85) {
+                    grade = old_grade * 2/3 + 100/3;
+                    proficiency = "Proficient";
+                    }
+                else if (old_grade <= 100) {
+                    grade = old_grade * 2/3 + 100/3;
+                    proficiency = "Excellent";
+                    }
+                else {
+                    grade = -1;
+                    }
 
+                if (grade == -1){
+                    alert("grade out of range");
+                } else {
+                    document.getElementById("text2").value = grade.toFixed(0);
+                    document.getElementById("proftag1").innerHTML = proficiency;
+                    document.getElementById("proftag2").innerHTML = proficiency;
+
+                }
+          }
+
+            function isNumberKey(evt)
+            {
+               var charCode = (evt.which) ? evt.which : event.keyCode
+               if (charCode > 31 && (charCode < 48 || charCode > 57))
+                  return false;
+
+               return true;
+            }
+        
+</script>
 </body>
 </html> 
